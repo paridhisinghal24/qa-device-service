@@ -31,6 +31,7 @@ public class BookingServiceImpl implements BookingService{
 	
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private FonoapiService fonoapiService;
     

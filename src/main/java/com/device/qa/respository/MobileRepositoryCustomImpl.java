@@ -44,7 +44,7 @@ public class MobileRepositoryCustomImpl implements MobileRepositoryCustom {
 
 	@Modifying
 	@Override
-	public boolean updateStatus(Long id, AvailabilityStatus availabilityStatus) {
+	public Boolean updateStatus(Long id, AvailabilityStatus availabilityStatus) {
 		Query query = entityManager.createNativeQuery("Update mobile set availability_status=?" +
 				" WHERE id = ?", Mobile.class);
 		query.setParameter(1, availabilityStatus);

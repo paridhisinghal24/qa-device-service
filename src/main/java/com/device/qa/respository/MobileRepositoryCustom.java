@@ -5,9 +5,9 @@ import com.device.qa.model.Mobile;
 
 
 public interface MobileRepositoryCustom {
-    Mobile getMobileByName(String mobileName);
+    public Mobile getMobileByName(String mobileName);
 
-    Boolean markMobileAsUnavailable(Long id);
+    public Boolean markMobileAsUnavailable(Long id);
     
-	boolean updateStatus(Long id, AvailabilityStatus availabilityStatus);
+    public Boolean updateStatus(Long id, AvailabilityStatus availabilityStatus);
 }

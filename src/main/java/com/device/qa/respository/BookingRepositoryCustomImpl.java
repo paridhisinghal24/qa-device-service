@@ -16,7 +16,7 @@ import jakarta.transaction.Transactional;
 public class BookingRepositoryCustomImpl implements BookingRepositoryCustom {
 	
 	@PersistenceContext
-	EntityManager entityManager;
+	private EntityManager entityManager;
 
 	@Override
 	public List<Booking> getBookingLog(Long mobileId) {
@@ -25,7 +25,7 @@ public class BookingRepositoryCustomImpl implements BookingRepositoryCustom {
 			Query query = entityManager.createNativeQuery("SELECT * FROM booking_log " +
 					"WHERE mobileid = ?", Booking.class);
 			query.setParameter(1, mobileId);
-			return (List<Booking> )query.getResultList();
+			return (List<Booking>)query.getResultList();
 		}
 		catch (NoResultException e) {
 			return null;

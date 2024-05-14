@@ -36,7 +36,7 @@ public class GenericRestClient {
 
     }
     
-public String postData(String url,  Map<String, String> requestBody) {
+    public String postData(String url,  Map<String, String> requestBody) {
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_JSON);
 	
