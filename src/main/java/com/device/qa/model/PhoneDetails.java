@@ -7,7 +7,6 @@ public class PhoneDetails {
 	private FonoapiResponse otherDetails;
 	private List<Booking> bookingLog;
 	public PhoneDetails() {
-		
 	}
 
 	public PhoneDetails(Mobile mobile, FonoapiResponse otherDetails, List<Booking> bookingLog) {

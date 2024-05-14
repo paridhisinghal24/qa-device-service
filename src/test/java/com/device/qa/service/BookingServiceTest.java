@@ -5,12 +5,9 @@ import com.device.qa.exceptions.UserException;
 import com.device.qa.model.AvailabilityStatus;
 import com.device.qa.model.Booking;
 import com.device.qa.model.Mobile;
-import com.device.qa.model.PhoneBookingRequest;
 import com.device.qa.model.PhoneDetails;
-import com.device.qa.model.PhoneReturnRequest;
 import com.device.qa.model.User;
 import com.device.qa.respository.BookingRepository;
-import com.device.qa.services.BookingService;
 import com.device.qa.services.BookingServiceImpl;
 import com.device.qa.services.FonoapiService;
 import com.device.qa.services.MobileService;
@@ -48,7 +45,7 @@ public class BookingServiceTest {
 
 		when(userService.findById(1L)).thenReturn(null);
 		assertThrows(UserException.class, () -> {
-			bookingService.bookPhone(new PhoneBookingRequest("test",1L));
+			bookingService.bookPhone(1L, "test");
         });
 	}
 	
@@ -59,7 +56,7 @@ public class BookingServiceTest {
 		when(mobileService.getMobileByName("test")).thenReturn(null);
 
 		assertThrows(MobileException.class, () -> {
-			bookingService.bookPhone(new PhoneBookingRequest("test",1L));
+			bookingService.bookPhone(1L, "test");
         });
 	}
 	
@@ -69,7 +66,7 @@ public class BookingServiceTest {
 		when(userService.findById(1L)).thenReturn(new User(1L,"test","test@eg.com","123"));
 		when(mobileService.getMobileByName("test")).thenReturn(new Mobile(1L,"test", AvailabilityStatus.No));
 		assertThrows(MobileException.class, () -> {
-			bookingService.bookPhone(new PhoneBookingRequest("test",1L));
+			bookingService.bookPhone(1L, "test");
         });
 	}
 	
@@ -80,7 +77,7 @@ public class BookingServiceTest {
 		when(mobileService.getMobileByName("test")).thenReturn(new Mobile(1L,"test", AvailabilityStatus.YES));
 		when(mobileService.markMobileAsUnavailable(1L)).thenReturn(false);
 		assertThrows(MobileException.class, () -> {
-			bookingService.bookPhone(new PhoneBookingRequest("test",1L));
+			bookingService.bookPhone(1L, "test");
         });
 	}
 	
@@ -91,7 +88,7 @@ public class BookingServiceTest {
 		when(mobileService.getMobileByName("test")).thenReturn(new Mobile(1L,"test", AvailabilityStatus.YES));
 		when(mobileService.markMobileAsUnavailable(1L)).thenReturn(true);
 		when(bookingRepository.save(Mockito.any(Booking.class))).thenReturn(new Booking());
-		assertEquals(true, bookingService.bookPhone(new PhoneBookingRequest("test",1L)));
+		assertEquals(true, bookingService.bookPhone(1L, "test"));
 	}
 	
 	@Test
@@ -99,7 +96,7 @@ public class BookingServiceTest {
 
 		when(userService.findById(1L)).thenReturn(null);
 		assertThrows(UserException.class, () -> {
-			bookingService.returnPhone(new PhoneReturnRequest("test",1L));
+			 bookingService.returnPhone(1L, "test");
         });
 	}
 	
@@ -110,7 +107,7 @@ public class BookingServiceTest {
 		when(mobileService.getMobileByName("test")).thenReturn(null);
 
 		assertThrows(MobileException.class, () -> {
-			bookingService.returnPhone(new PhoneReturnRequest("test",1L));
+			bookingService.returnPhone(1L, "test");
         });
 	}
 	
@@ -123,7 +120,7 @@ public class BookingServiceTest {
 		when(mobileService.getMobileByName("test")).thenReturn(new Mobile(1L,"test", AvailabilityStatus.YES));
 		when(mobileService.updateStatus(1L, AvailabilityStatus.YES)).thenReturn(false);
 		assertThrows(MobileException.class, () -> {
-			bookingService.returnPhone(new PhoneReturnRequest("test",1L));
+			bookingService.returnPhone(1L, "test");
         });
 	}
 	
@@ -133,7 +130,7 @@ public class BookingServiceTest {
 		when(userService.findById(1L)).thenReturn(new User(1L,"test","test@eg.com","123"));
 		when(mobileService.getMobileByName("test")).thenReturn(new Mobile(1L,"test", AvailabilityStatus.YES));
 		when(mobileService.updateStatus(1L, AvailabilityStatus.YES)).thenReturn(true);
-		assertEquals(true, bookingService.returnPhone(new PhoneReturnRequest("test",1L)));
+		assertEquals(true, bookingService.returnPhone(1L, "test"));
 	}
 	
 	@Test

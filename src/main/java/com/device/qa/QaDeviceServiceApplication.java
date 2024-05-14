@@ -9,5 +9,4 @@ public class QaDeviceServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(QaDeviceServiceApplication.class, args);
 	}
-
 }

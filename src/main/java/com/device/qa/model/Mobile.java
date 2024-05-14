@@ -17,14 +17,19 @@ public class Mobile implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "availability_status")
     private AvailabilityStatus availabilityStatus;
+    public Mobile() {
 
+	}
 	public Mobile(Long id, String mobileName, AvailabilityStatus availabilityStatus) {
-		super();
 		this.id = id;
 		this.mobileName = mobileName;
 		this.availabilityStatus = availabilityStatus;
 	}
 
+	public Mobile(String mobileName, AvailabilityStatus availabilityStatus) {
+		this.mobileName = mobileName;
+		this.availabilityStatus = availabilityStatus;
+	}
 	public Long getId() {
 		return id;
 	}

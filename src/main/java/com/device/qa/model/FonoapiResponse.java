@@ -1,29 +1,74 @@
 package com.device.qa.model;
-
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FonoapiResponse {
-	private List<Data> data;
-
-	public List<Data> getData() {
-		return data;
+	
+	
+	private String DeviceName;
+    private String Brand;
+    private String technology;
+    private String bands2g;
+    private String bands3g;
+    private String bands4g;
+    private String bands5g;
+    public FonoapiResponse() {
+    	
+    }
+	public FonoapiResponse(String deviceName, String brand, String technology, String bands2g, String bands3g,
+			String bands4g, String bands5g) {
+		DeviceName = deviceName;
+		Brand = brand;
+		this.technology = technology;
+		this.bands2g = bands2g;
+		this.bands3g = bands3g;
+		this.bands4g = bands4g;
+		this.bands5g = bands5g;
 	}
-
-	public FonoapiResponse(List<Data> data) {
-		super();
-		this.data = data;
+	
+	public String getDeviceName() {
+		return DeviceName;
 	}
-
-	public void setData(List<Data> data) {
-		this.data = data;
+	public void setDeviceName(String deviceName) {
+		DeviceName = deviceName;
 	}
-
-	public FonoapiResponse() {
-
+	public String getBrand() {
+		return Brand;
 	}
+	public void setBrand(String brand) {
+		Brand = brand;
+	}
+	public String getTechnology() {
+		return technology;
+	}
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+	public String getBands2g() {
+		return bands2g;
+	}
+	public void setBands2g(String bands2g) {
+		this.bands2g = bands2g;
+	}
+	public String getBands3g() {
+		return bands3g;
+	}
+	public void setBands3g(String bands3g) {
+		this.bands3g = bands3g;
+	}
+	public String getBands4g() {
+		return bands4g;
+	}
+	public void setBands4g(String bands4g) {
+		this.bands4g = bands4g;
+	}
+	public String getBands5g() {
+		return bands5g;
+	}
+	public void setBands5g(String bands5g) {
+		this.bands5g = bands5g;
+	}
+    
 
 }
 @JsonIgnoreProperties(ignoreUnknown = true)

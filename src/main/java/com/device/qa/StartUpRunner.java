@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.device.qa.model.FonoapiResponse;
@@ -16,17 +15,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Component
-public class StartUp implements CommandLineRunner {
+public class StartUpRunner implements CommandLineRunner {
 
 	@Autowired
 	private MobileService mobileService;
 	
 	@Autowired
 	private FonoapiService fonoapiService;
-	
-	@Value("${spring.fonoapi.url}")
-	private String fonoapiURl;
-	
+
 	
     public void run(String... args) throws JsonMappingException, JsonProcessingException {
     	List<Mobile> listMobiles = mobileService.getAll();

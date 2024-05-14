@@ -10,18 +10,14 @@ import com.device.qa.model.AvailabilityStatus;
 import com.device.qa.model.Booking;
 import com.device.qa.model.FonoapiResponse;
 import com.device.qa.model.Mobile;
-import com.device.qa.model.PhoneBookingRequest;
 import com.device.qa.model.PhoneDetails;
-import com.device.qa.model.PhoneReturnRequest;
 import com.device.qa.model.User;
 import com.device.qa.respository.BookingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.transaction.Transactional;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,16 +36,16 @@ public class BookingServiceImpl implements BookingService{
     
 	@Transactional
 	@Override
-	public Boolean bookPhone(PhoneBookingRequest phoneBookingRequest) throws MobileException, UserException {
-		User user = userService.findById(phoneBookingRequest.getUserId());
+	public Boolean bookPhone(Long userId, String mobileName) throws MobileException, UserException {
+		User user = userService.findById(userId);
 		if( user == null ) {
 			throw new UserException("User not found exception");
 		}
 		System.out.println(user);
-		Mobile mobile = mobileService.getMobileByName(phoneBookingRequest.getMobileName());
+		Mobile mobile = mobileService.getMobileByName(mobileName);
 		System.out.println(mobile);
 		if(mobile!=null && mobile.getAvailabilityStatus() == AvailabilityStatus.YES) {
-			Booking booking = new Booking(phoneBookingRequest.getUserId(), mobile.getId() , Instant.now());
+			Booking booking = new Booking(userId, mobile.getId() , Instant.now());
 		    // Mark the mobile phone unavailable and then update the booking log
 			if( mobileService.markMobileAsUnavailable(mobile.getId())) {
 				bookingRepository.save(booking);
@@ -63,13 +59,13 @@ public class BookingServiceImpl implements BookingService{
 	}
 
 	@Override
-	public Boolean returnPhone(PhoneReturnRequest phoneReturnRequest) throws MobileException, UserException {
-		User user = userService.findById(phoneReturnRequest.getUserId());
+	public Boolean returnPhone(Long userId, String mobileName ) throws MobileException, UserException {
+		User user = userService.findById(userId);
 		if( user == null ) {
 			throw new UserException("User not found exception");
 		}
 		System.out.println(user);
-		Mobile mobile = mobileService.getMobileByName(phoneReturnRequest.getMobileName());
+		Mobile mobile = mobileService.getMobileByName(mobileName);
 		System.out.println(mobile);
 		if(mobile!=null) {
 		    // Mark the mobile phone available

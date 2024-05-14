@@ -15,7 +15,7 @@ public class MobileServiceImpl implements MobileService{
 
 	@Autowired
 	private MobileRepository mobileRepository;
-
+	
 	@Override
 	public List<Mobile> getAll() {
 	    List<Mobile> mobiles = new ArrayList<>();
@@ -40,7 +40,5 @@ public class MobileServiceImpl implements MobileService{
 	public boolean updateStatus(Long id, AvailabilityStatus availabilityStatus) {
 		return mobileRepository.updateStatus(id, availabilityStatus);
 	}
-
-	
 
 }

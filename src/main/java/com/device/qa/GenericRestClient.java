@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,6 +32,18 @@ public class GenericRestClient {
 
         // Send GET request and parse response
         ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class);
+        return responseEntity.getBody();
+
+    }
+    
+public String postData(String url,  Map<String, String> requestBody) {
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	
+	    HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+        // Send post request and parse response
+        ResponseEntity<String> responseEntity = restTemplate
+        		.exchange(url, HttpMethod.POST, requestEntity, String.class);
         return responseEntity.getBody();
 
     }
